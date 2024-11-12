@@ -1,5 +1,5 @@
 const submit = document.querySelector('#submit');
-const mainlandSecond = "ABCDEFGHIJKRSTYZ";
+const mainlandSecond = "ABCDEFGHIJKRSTYZ0123456789";
 const taiwanSecond = "MNOPQUVWX";
 const hongKongPrefix = "VR2";
 const macauPrefix = "XX9";
@@ -71,7 +71,27 @@ const taiwanAreaRules = {
 }
 
 const specialStations = {
-    'BS7H': ['黄岩岛特殊台', '海南']
+    'BS7H': ['黄岩岛特殊台', '海南'],
+    'B0CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B1CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B2CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B3CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B4CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B5CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B6CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B7CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B8CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B9CRA': ['CRAC 中国业余无线电节活动电台', '-'],
+    'B0HQ': ['CRAC HQ', '-'],
+    'B1HQ': ['CRAC HQ', '-'],
+    'B2HQ': ['CRAC HQ', '-'],
+    'B3HQ': ['CRAC HQ', '-'],
+    'B4HQ': ['CRAC HQ', '-'],
+    'B5HQ': ['CRAC HQ', '-'],
+    'B6HQ': ['CRAC HQ', '-'],
+    'B7HQ': ['CRAC HQ', '-'],
+    'B8HQ': ['CRAC HQ', '-'],
+    'B9HQ': ['CRAC HQ', '-'],
 };
 
 // 如果 callSign 为五位
@@ -86,8 +106,9 @@ function callSignRegion(callSign) {
 }
 
 function radioStationType(callSign) {
-    if(callSign[1] == 'J') return '业余信标台 / 空间业余无线电台';
-    if(callSign[1] == 'R') return '业余中继台';
+    if(callSign[1] == 'J') return '信标台 / 空间业余无线电台';
+    if(callSign[1] == 'R') return '中继台';
+    if("0123456789".includes(callSign[1])) return '未知';
     return '普通电台';
 }
 
@@ -163,15 +184,17 @@ submit.addEventListener('click', function(e) {
     e.preventDefault();
     const callSign = document.querySelector('#call-sign-input').value;
     let result = checkCallSign(callSign);
+    document.getElementById('display-result').style.display = "block";
+    document.getElementById('callsign').innerHTML = callSign;
     if(result) {
-        document.getElementById('display-result').style.display = "block";
-        document.getElementById('callsign').innerHTML = callSign;
         document.getElementById('region').innerHTML = result.region;
         document.getElementById('province').innerHTML = result.province;
         document.getElementById('type').innerHTML = result.stationType;  
-        document.getElementById('search-qrz').href = "https://www.qrz.com/db/" + callSign;
     }
     else {
-        displayResult.innerHTML = "请输入正确的呼号";
+        document.getElementById('region').innerHTML = '未识别的呼号';
+        document.getElementById('province').innerHTML = '-';
+        document.getElementById('type').innerHTML = '-';   
     }
+    document.getElementById('search-qrz').href = "https://www.qrz.com/db/" + callSign;
 });
