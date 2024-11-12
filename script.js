@@ -145,14 +145,13 @@ function mainlandProvices(callSign) {
 }
 
 function checkCallSign(callSign){
-    if(callSign.length >= 4 && callSign.length <= 6) {
+    if(callSign.length >= 3 && callSign.length <= 6) {
         let region = callSignRegion(callSign);
         let province = null;
         let stationType = null;
         if(region == '大陆') {
             province = mainlandProvices(callSign);
             stationType = radioStationType(callSign);
-            console.log(stationType);
             if(specialStations[callSign]){
                 stationType = specialStations[callSign][0];
                 province = specialStations[callSign][1];
