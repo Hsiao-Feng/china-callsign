@@ -119,8 +119,7 @@
     <main>
         <h1 class="with-icon">中国呼号查询系统</h1>
         <form>
-            <input type="text" id="call-sign-input" oninput="this.value = this.value.toUpperCase()" maxlength="6"
-                placeholder="在此输入电台呼号..." />
+            <input type="text" id="call-sign-input" autofocus oninput="this.value = this.value.toUpperCase()" maxlength="6" placeholder="在此输入电台呼号..." />
             <input type="submit" id="submit" value="查询" />
         </form>
         <p>本系统所提供查询结果仅供查询者个人参考，不应视为权威意见。</p>
@@ -155,7 +154,7 @@
         <p>由<a href="https://hsiaofeng.com">筱枫</a>制作 · <a href="https://github.com/Hsiao-Feng/china-callsign">源码与程序说明</a></p>
         <p>样式来自 <a href="https://github.com/kognise/water.css">water.css</a> · 标志取自 <a href="https://icons.getbootstrap.com/">Bootstrap Icons</a></p>
     </footer>
-    <script src="script.js"></script>
+    <script src="script.js?1"></script>
 </body>
 
 </html>
