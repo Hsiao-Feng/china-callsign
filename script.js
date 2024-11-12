@@ -70,6 +70,24 @@ const taiwanAreaRules = {
     '9': '台湾本岛以外地区'
 }
 
+const taiwanIslandsRules = {
+    'BV9W': '彭佳屿',
+    'BV9M': '棉花屿',
+    'BV9H': '花瓶屿',
+    'BV9C': '基隆屿',
+    'BV9K': '龟山岛',
+    'BV9A': '澎湖群岛',
+    'BV9G': '绿岛',
+    'BV9L': '琉球屿',
+    'BV9O': '兰屿',
+    'BV0O': '兰屿',
+    'BV9P': '东沙岛',
+    'BQ9P': '东沙岛',
+    'BV9S': '太平岛',
+    'BO0M': '妈祖',
+    'BO0K': '金门'
+}
+
 const specialStations = {
     'BS7H': ['黄岩岛特殊台', '海南'],
     'B0CRA': ['CRAC 中国业余无线电节活动电台', '-'],
@@ -159,6 +177,7 @@ function checkCallSign(callSign){
         }
         else if(region == '台湾') {
             province = taiwanAreaRules[callSign[2]];
+            if(taiwanIslandsRules[callSign.slice(0, 4)]) province = taiwanIslandsRules[callSign.slice(0, 4)];
             if(callSign.length == 4){
                 stationType = '特殊电台';
                 if(callSign[1] == 'X') stationType = '中继台';
