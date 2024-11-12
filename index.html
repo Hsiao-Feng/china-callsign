@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国呼号查询</title>
+    <meta name="description" content="本系统依照大陆、香港、澳门、台湾的现有呼号分配规则，根据呼号不同位数的字符代表含义，提供呼号查询服务。">
+    <link rel='stylesheet' href='water-light.css'>
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-broadcast-pin' viewBox='0 0 16 16'%3e %3cpath d='M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707m2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708m5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708m2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8'/%3e %3c/svg%3e"/>
+    <meta name="author" content="Hsiao Feng">
+    <style>
+        body {
+            font-family: "Noto Sans", "Source Han Sans", "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+            margin: 0 auto;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #AAA;
+        }
+
+        input {
+            padding: 5px;
+            margin: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        tr {
+            text-align: left;
+        }
+
+        #call-sign-input {
+            font-family: "OCR-B 10 BT", "Consolas", monospace;
+            margin-left: 0;
+            padding: .9rem;
+        }
+
+        #callsign {
+            font-family: "OCR-B 10 BT", "Consolas", monospace;
+            font-weight: bold;
+        }
+
+        #search-more {
+            margin-top: 20px;
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        h1::before {
+            content: '';
+            display: inline-block;
+            width: 1.2em;
+            height: 1.2em;
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-broadcast-pin' viewBox='0 0 16 16'%3e %3cpath d='M3.05 3.05a7 7 0 0 0 0 9.9.5.5 0 0 1-.707.707 8 8 0 0 1 0-11.314.5.5 0 0 1 .707.707m2.122 2.122a4 4 0 0 0 0 5.656.5.5 0 1 1-.708.708 5 5 0 0 1 0-7.072.5.5 0 0 1 .708.708m5.656-.708a.5.5 0 0 1 .708 0 5 5 0 0 1 0 7.072.5.5 0 1 1-.708-.708 4 4 0 0 0 0-5.656.5.5 0 0 1 0-.708m2.122-2.12a.5.5 0 0 1 .707 0 8 8 0 0 1 0 11.313.5.5 0 0 1-.707-.707 7 7 0 0 0 0-9.9.5.5 0 0 1 0-.707zM6 8a2 2 0 1 1 2.5 1.937V15.5a.5.5 0 0 1-1 0V9.937A2 2 0 0 1 6 8'/%3e %3c/svg%3e") no-repeat;
+            background-size: 1.2em;
+            padding-right: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 20px;
+        }
+
+        th {
+            width: 6em;
+            border-bottom: none;
+        }
+
+        footer a {
+            color: #7da1c5;
+        }
+
+        footer p {
+            line-height: 1;
+        }
+
+        #submit {
+            background-color: #0076d1;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>中国呼号查询系统</h1>
+        <form>
+            <input type="text" id="call-sign-input" oninput="this.value = this.value.toUpperCase()" maxlength="6"
+                placeholder="在此输入电台呼号..." />
+            <input type="submit" id="submit" value="查询" />
+        </form>
+        <p>本系统所提供查询结果仅供查询者个人参考，不应视为权威意见。</p>
+        <div id="display-result" style="display: none">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>呼号</th>
+                        <td id="callsign"></td>
+                    </tr>
+                    <tr>
+                        <th>地区</th>
+                        <td id="region"></td>
+                    </tr>
+                    <tr>
+                        <th>行政区</th>
+                        <td id="province"></td>
+                    </tr>
+                    <tr>
+                        <th>电台类型</th>
+                        <td id="type"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="search-more">
+                <a id="search-qrz">在 QRZ.COM 进一步搜索...</a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>由<a href="https://hsiaofeng.com">筱枫</a>制作 · <a href="https://github.com/Hsiao-Feng/china-callsign">源码与程序说明</a></p>
+        <p>样式来自 <a href="https://github.com/kognise/water.css">water.css</a> · 标志取自 <a href="https://icons.getbootstrap.com/">Bootstrap Icons</a></p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
