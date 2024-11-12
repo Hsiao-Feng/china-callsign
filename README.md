@@ -20,7 +20,7 @@ https://hsiaofeng.com/tools/china-callsign/
 
 澳门：[《業餘無綫電通訊規章》](https://bo.io.gov.mo/bo/i/94/24/declei29_cn.asp)
 
-台湾：[《業餘無線電管理辦法》第 28 條](https://ncclaw.ncc.gov.tw/FLAW/FLAWDOC01.aspx?id=FL012804&flno=28)
+台湾：[《業餘無線電管理辦法》第 28 條](https://ncclaw.ncc.gov.tw/FLAW/FLAWDOC01.aspx?id=FL012804&flno=28)、[《台灣島嶼的呼號分配表》](http://www.tarc.com.tw/hams/taiwanislands.htm)（台中業餘無線電俱樂部）
 
 ## 致谢
 
